@@ -106,10 +106,34 @@ lm_stats <- function(variable_of_interest){
   
   new_df <- data.frame(response_variable, explanatory_variable)
   
+  new_fit <- linear_reg() %>%
+    set_engine("lm") %>% 
+    fit(response_variable ~ explanatory_variable, data = new_df)
   
+  slope <- parsnip::tidy(new_fit) %>%
+    filter(term == "explanatory_variable") %>%
+    pull(estimate)
   
+  r_squared <- glance(new_fit) %>%
+    pull(r.squared)
   
+  p_value <- glance(new_fit) %>%
+    pull(p.value)
+  
+  return(
+    list(
+      slope = slope, 
+      r_squared = r_squared,
+      p_value = p_value
+      )
+    
+    )
 }
+
+
+lm_stats(variable_of_interest = "danceability")
+lm_stats(variable_of_interest = "valence")
+lm_stats(variable_of_interest = "key")
 
 ```
 
