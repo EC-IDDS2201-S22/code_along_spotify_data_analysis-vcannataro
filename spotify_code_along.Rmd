@@ -1,0 +1,57 @@
+---
+title: "Spotify data exploration and modeling"
+subtitle: "Or, how to make the perfect song"
+author: "The IDDS 2201 team"
+date: "2022-04-06"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r package load in, message=F,warning=F, echo=F}
+library(tidyverse)
+library(tidymodels)
+```
+
+
+
+Today we will explore our Spotify playlist data! 
+
+We will use this as an opportunity to practice data: 
+
+- import
+- exploration
+- transformation and tidying
+- visualization,
+- and functional and iterative programming.
+
+We will also take this opportunity to learn: 
+
+- modeling and
+- model interpretation.
+
+Our goal here is to find **which variables explain the most variation in track popularity.**
+
+For reference, you can always look at our [class lecture notes](https://vcannataro.github.io/IDDS_2201_public/Lectures/), and the lecture slide deck on [modeling](https://vcannataro.github.io/IDDS_2201_public/Lectures/L12_modeling_p1/L12_modeling_part_1.html?panelset=plot&panelset1=plot2&panelset2=plot3&panelset3=plot4&panelset4=plot5&panelset5=plot6&panelset6=plot7&panelset7=plot8#34) is especially useful! 
+
+Let's start with importing our class playlist and seeing what the data looks like. Head over to the `data/` subdirectory and find the `IDDS_class_playlist`. Look at the `README.md` file to see definitions of some variables in our dataset. 
+
+
+# Data import and check
+
+```{r import class playlist}
+# What type of data file is the IDDS class playlist? 
+# 
+```
+
+
+# Data explore 
+
+# Data visualize and model
+
+
+
+
