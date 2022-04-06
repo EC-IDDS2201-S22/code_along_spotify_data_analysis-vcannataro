@@ -71,7 +71,23 @@ IDDS_class_playlist %>%
 # Data visualize and model
 
 
+```{r}
+IDDS_class_playlist %>% 
+  ggplot(aes(y=track.popularity, x=danceability)) + 
+  geom_point() + 
+  geom_smooth(method = "lm")
+```
 
+```{r}
+dance_regression <- linear_reg() %>%
+  set_engine("lm") %>%
+  fit(track.popularity ~ danceability, data = IDDS_class_playlist)
+
+parsnip::tidy(dance_regression)
+
+glance(dance_regression)
+
+```
 
 
 
