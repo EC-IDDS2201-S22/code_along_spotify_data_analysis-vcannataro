@@ -44,13 +44,38 @@ Let's start with importing our class playlist and seeing what the data looks lik
 
 ```{r import class playlist}
 # What type of data file is the IDDS class playlist? 
-# 
+
+IDDS_class_playlist <- read_rds(file = "data/IDDS_class_playlist.rds")
+
 ```
 
 
 # Data explore 
 
+```{r}
+glimpse(IDDS_class_playlist)
+```
+
+
+
+```{r}
+IDDS_class_playlist %>%
+  ggplot(aes(x=track.popularity)) + 
+  geom_histogram()
+```
+
+
+
+
+
 # Data visualize and model
+
+
+
+
+
+
+
 
 
 
