@@ -170,3 +170,86 @@ IDDS_stats
 
 
 
+
+```{r}
+spotify_big_data <- read_csv("data/spotify_big_data.csv") 
+glimpse(spotify_big_data)
+```
+
+
+
+
+
+
+```{r}
+
+lm_stats_spotify <- function(variable_of_interest){
+  
+  response_variable <- spotify_big_data %>%
+    pull(track.popularity)
+  
+  explanatory_variable <- spotify_big_data %>%
+    pull(variable_of_interest) 
+  
+  new_df <- data.frame(response_variable, explanatory_variable)
+  
+  new_fit <- linear_reg() %>%
+    set_engine("lm") %>% 
+    fit(response_variable ~ explanatory_variable, data = new_df)
+  
+  slope <- parsnip::tidy(new_fit) %>%
+    filter(term == "explanatory_variable") %>%
+    pull(estimate)
+  
+  r_squared <- glance(new_fit) %>%
+    pull(r.squared)
+  
+  p_value <- glance(new_fit) %>%
+    pull(p.value)
+  
+  return(
+    list(
+      slope = slope, 
+      r_squared = r_squared,
+      p_value = p_value
+      )
+    
+    )
+}
+
+
+
+my_variables_big <- spotify_big_data %>%
+  select_if(is.numeric) %>%
+  select(!track.popularity) %>% 
+  names()
+
+spotify_stats <- data.frame(my_variables_big, slope=NA, r_squared = NA, p_value = NA)
+
+
+row_ind <- 1
+
+
+for(row_ind in 1:nrow(spotify_stats)  ){
+  
+  stats_results <- lm_stats_spotify(variable_of_interest = spotify_stats[row_ind,"my_variables_big"])
+  
+  spotify_stats[row_ind, "slope"] <- stats_results$slope
+  
+  spotify_stats[row_ind, "r_squared"] <- stats_results$r_squared
+  
+  spotify_stats[row_ind, "p_value"] <- stats_results$p_value
+  
+  message("I finished this loop")
+  
+}
+
+spotify_stats
+
+
+```
+
+
+
+
+
