@@ -89,7 +89,29 @@ glance(dance_regression)
 
 ```
 
+# building a function
 
+
+```{r}
+
+variable_of_interest <- "danceability"
+
+lm_stats <- function(variable_of_interest){
+  
+  response_variable <- IDDS_class_playlist %>%
+    pull(track.popularity)
+  
+  explanatory_variable <- IDDS_class_playlist %>%
+    pull(variable_of_interest) 
+  
+  new_df <- data.frame(response_variable, explanatory_variable)
+  
+  
+  
+  
+}
+
+```
 
 
 
