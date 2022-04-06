@@ -138,6 +138,34 @@ lm_stats(variable_of_interest = "key")
 ```
 
 
+```{r}
+my_variables <- IDDS_class_playlist %>%
+  select_if(is.numeric) %>%
+  select(!track.popularity) %>% 
+  names()
+
+IDDS_stats <- data.frame(my_variables, slope=NA, r_squared = NA, p_value = NA)
+
+
+row_ind <- 1
+
+
+for(row_ind in 1:nrow(IDDS_stats)  ){
+  
+  stats_results <- lm_stats(variable_of_interest = IDDS_stats[row_ind,"my_variables"])
+  
+  IDDS_stats[row_ind, "slope"] <- stats_results$slope
+  
+  IDDS_stats[row_ind, "r_squared"] <- stats_results$r_squared
+  
+  IDDS_stats[row_ind, "p_value"] <- stats_results$p_value
+  
+  message("I finished this loop")
+  
+}
+
+IDDS_stats
+```
 
 
 
