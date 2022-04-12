@@ -253,3 +253,42 @@ spotify_stats
 
 
 
+
+
+```{r}
+spotify_big_data %>%
+  ggplot(aes(y=track.popularity, x=instrumentalness, color= playlist_genre)) + 
+  geom_point() + 
+  geom_smooth(method="lm") + 
+  theme_bw() + 
+  scale_color_viridis_d()
+```
+
+
+```{r}
+model_instr_genre_fit <- linear_reg() %>%
+  set_engine("lm") %>%
+  fit(track.popularity ~ instrumentalness * playlist_genre, data = spotify_big_data)
+
+
+parsnip::glance(model_instr_genre_fit )
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
